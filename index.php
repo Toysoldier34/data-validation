@@ -31,34 +31,42 @@ function validPartFunction($str)
     $trim = trim($str);  //removes blank space at start and end
     $bits = explode('-', $trim);  //splits string into string array at each -
     if (sizeof($bits) != 3) return false;  //if incorrect number of segments
-    //puts array parts into separate variables
-    $cat = $bits[0];
-    $ware = $bits[1];
-    $part = $bits[2];
 
+    $valid = true;
 
-    $valid = validCat($cat);
-    $valid = validWare($ware);
-    $valid = validPart($part);
+        //check department category
+    $cat = strtoupper($bits[0]);
+    if (!($cat == "HW" || $cat == "SG" || $cat == "AP") && (strlen($cat) == 2)) {
+        $valid = false;
+    }
+
+    //check warehouse number
+    if (!ctype_digit($bits[1]) && (strlen($bits[1]) == 2)) {
+        $valid = false;
+    }
+
+    //check part number
+    if (!ctype_alnum($bits[2]) && (strlen($bits[2]) == 4)) {
+        $valid = false;
+    }
 
     return $valid;
 }
 
-function validCat($cat)
-{
-    $cat = strtoupper($cat);
-    if ($cat == "HW" | $cat == "SG" | $cat == "AP") return true;
-    return false;
-}
 
-function validWare($ware)
-{
-    return true;
-}
 
-function validPart($part)
-{
-    return true;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
