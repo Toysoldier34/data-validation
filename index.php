@@ -66,10 +66,49 @@ function validPartRegEx($str)
         return false;
     }
 }
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Part checker</title>
+</head>
 
+<body>
+<label for="part">Enter Part ID: <input type = "text" name="part" id="part"></label><br>
+<button id="check">Check</button><br>
+<p id="result"></p>
 
+<script>
+    var btn = document.getElementById("check");
+    var textPart = document.getElementById("part");
+    var textResult = document.getElementById("result");
 
+    btn.onclick = fnCheck;
 
+    function fnCheck() {
+        var part = textPart.value;
+        if (validSid(part)) {
+            textResult.innerHTML = part + " is valid";
+        }
+        else {
+            textResult.innerHTML = part + " is not valid";
+        }
+    }
+
+    function validSid(part)
+    {
+        var pattern = /^(hw)*(sg)*(AP)*-\d{2}-\w{4}$/i;
+        var regex = new RegExp(pattern);
+        var n = part.search(regex);
+        if(n >= 0)
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+</script>
 
 
 
