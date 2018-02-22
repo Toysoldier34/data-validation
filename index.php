@@ -8,7 +8,7 @@
  */
 
 //array to test against
-$parts = array("AP-12-3507", "  ap-99-X109  ", "SG-05-ab20", "ab-22-N250", "SG-xx-N250", "SG-22-250", "SG-22-250*");
+$parts = array("AP-12-3507", "  ap-99-X109  ", "SG-05-ab20", "ab-22-N250", "SG-xx-N250", "SG-22-250", "SG-22-250*", "HW-45-AX54");
 
 
 /***** PART 1 *****/
@@ -54,8 +54,17 @@ foreach ($parts as $part) {
 
 function validPartRegEx($str)
 {
-    //For Micheal
-    return true;
+    $expression = "/^(hw)*(sg)*(AP)*-\d{2}-\w{4}$/i";
+    $replace = "/\s+/";
+    $clean = preg_replace($replace,'',$str);
+    if(preg_match($expression,$clean))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 
